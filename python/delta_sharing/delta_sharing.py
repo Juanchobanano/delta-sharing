@@ -105,6 +105,7 @@ def load_as_pandas(
     timestamp: Optional[str] = None,
     jsonPredicateHints: Optional[str] = None,
     use_delta_format: Optional[bool] = None,
+    skip_errors: Optional[bool] = False
 ) -> pd.DataFrame:
     """
     Load the shared table using the given url as a pandas DataFrame.
@@ -127,7 +128,8 @@ def load_as_pandas(
         limit=limit,
         version=version,
         timestamp=timestamp,
-        use_delta_format=use_delta_format
+        use_delta_format=use_delta_format,
+        skip_errors=skip_errors
     ).to_pandas()
 
 
@@ -234,7 +236,7 @@ def load_table_changes_as_pandas(
     profile = DeltaSharingProfile.read_from_file(profile_json)
     return DeltaSharingReader(
         table=Table(name=table, share=share, schema=schema),
-        rest_client=DataSharingRestClient(profile),
+        rest_client=DataSharingRestClient(profile)
     ).table_changes_to_pandas(CdfOptions(
         starting_version=starting_version,
         ending_version=ending_version,
