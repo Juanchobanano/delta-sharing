@@ -35,7 +35,7 @@ except IOError:
 VERSION = __version__  # noqa
 
 setup(
-    name='delta-sharing',
+    name='delta-sharing-custom',
     version=VERSION,
     packages=[
         'delta_sharing',
