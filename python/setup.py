@@ -38,7 +38,7 @@ setup(
     name='delta-sharing-custom',
     version=VERSION,
     packages=[
-        'delta_sharing',
+        'python/delta_sharing',
     ],
     python_requires='>=3.8',
     install_requires=[
