@@ -27,7 +27,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
 
 try:
-    exec(open('delta_sharing/version.py').read())
+    exec(open('./python/delta_sharing/version.py').read())
 except IOError:
     print("Failed to load Delta Sharing version file for packaging.",
           file=sys.stderr)
