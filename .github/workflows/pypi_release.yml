@@ -30,7 +30,7 @@ jobs:
         python python/setup.py sdist bdist_wheel
     - name: Copy files
       run: >-
-        cp python/delta_sharing ./dist/python
+        cp python/delta_sharing_custom ./dist/python
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
