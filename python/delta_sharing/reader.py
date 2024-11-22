@@ -43,9 +43,11 @@ class DeltaSharingReader:
         version: Optional[int] = None,
         timestamp: Optional[str] = None,
         use_delta_format: Optional[bool] = None,
+        skip_errors: Optional[bool] = False
     ):
         self._table = table
         self._rest_client = rest_client
+        self.errors = []
 
         if predicateHints is not None:
             assert isinstance(predicateHints, Sequence)
@@ -143,7 +145,14 @@ class DeltaSharingReader:
 
         # Write the add file actions to the log file
         for line in lines:
-            line_json = loads(line)
+            try:
+                line_json = loads(line)
+            except Exception as e:
+                if skip_errors:
+                    self.errors.append(line)
+                    continue
+                else:
+                    raise e
             dump(line_json["file"]["deltaSingleAction"], json_file)
             json_file.write("\n")
 
